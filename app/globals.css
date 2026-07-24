@@ -1,26 +1,183 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Paper & Ink — neo-brutalist token set */
+  --background: #f4eee1;
+  --foreground: #171610;
+  --card: #fffbf0;
+  --card-foreground: #171610;
+  --ink: #171610;
+  --paper: #f4eee1;
+  --accent: #ff4d24;
+  --accent-foreground: #171610;
+  --sun: #ffc943;
+  --lilac: #8a7cff;
+  --mint: #17a97e;
+  --muted: #e9e0ca;
+  --muted-foreground: #56523f;
+  --border: #171610;
+  --ring: #ff4d24;
+  --shadow-color: #171610;
+}
+
+.dark {
+  --background: #14130f;
+  --foreground: #f4eee1;
+  --card: #1d1c16;
+  --card-foreground: #f4eee1;
+  --ink: #f4eee1;
+  --paper: #14130f;
+  --accent: #ff5a31;
+  --accent-foreground: #171610;
+  --sun: #ffc943;
+  --lilac: #a99dff;
+  --mint: #2fc496;
+  --muted: #28261e;
+  --muted-foreground: #aaa48e;
+  --border: #f4eee1;
+  --ring: #ff5a31;
+  --shadow-color: #f4eee1;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-ink: var(--ink);
+  --color-paper: var(--paper);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-sun: var(--sun);
+  --color-lilac: var(--lilac);
+  --color-mint: var(--mint);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --font-sans: var(--font-space-grotesk);
+  --font-display: var(--font-bricolage);
+  --font-mono: var(--font-jetbrains);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: var(--accent);
+    color: var(--accent-foreground);
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--ring);
+    outline-offset: 3px;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Hard offset shadows — the neo-brutalist signature. No blur, ever. */
+@utility shadow-hard-sm {
+  box-shadow: 3px 3px 0 0 var(--shadow-color);
+}
+
+@utility shadow-hard {
+  box-shadow: 5px 5px 0 0 var(--shadow-color);
+}
+
+@utility shadow-hard-lg {
+  box-shadow: 8px 8px 0 0 var(--shadow-color);
+}
+
+/* Mechanical press: element travels into its own shadow on hover/press. */
+@utility press {
+  transition:
+    transform 150ms cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 150ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.press:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 3px 3px 0 0 var(--shadow-color);
+}
+
+.press:active {
+  transform: translate(5px, 5px);
+  box-shadow: 0 0 0 0 var(--shadow-color);
+}
+
+.press-lg:hover {
+  transform: translate(3px, 3px);
+  box-shadow: 5px 5px 0 0 var(--shadow-color);
+}
+
+.press-lg:active {
+  transform: translate(8px, 8px);
+  box-shadow: 0 0 0 0 var(--shadow-color);
+}
+
+/* Subtle paper grain */
+@utility paper-grain {
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    color-mix(in srgb, var(--foreground) 7%, transparent) 1px,
+    transparent 0
+  );
+  background-size: 28px 28px;
+}
+
+/* Scrolling ticker ribbon. Content must be duplicated once (aria-hidden). */
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@utility animate-marquee {
+  animation: marquee-scroll 24s linear infinite;
+}
+
+/* Hand-drawn squiggle underline */
+@utility squiggle {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='6' viewBox='0 0 24 6'%3E%3Cpath d='M0 3 C 3 0, 6 0, 9 3 S 15 6, 18 3 S 21 0, 24 3' fill='none' stroke='%23ff4d24' stroke-width='2'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  background-position: 0 100%;
+  background-size: 24px 6px;
+  padding-bottom: 8px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .animate-marquee {
+    animation: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }
