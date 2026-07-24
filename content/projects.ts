@@ -42,7 +42,7 @@ export const projects: Project[] = [
       "Placed 3rd. Halved projection error (14.2% → 7.1%) against 5-year historical backtests; Python backend validated at 3,247 peak requests/min with Locust.",
     award: "GS ELS 3rd Place",
     tech: ["Python", "FastAPI", "Angular", "Locust"],
-    repo: "Goldman-Sachs-ELS-Challange",
+    repo: "Goldman-Sachs-ELS-Challenge",
     featured: true,
   },
   {
@@ -89,9 +89,10 @@ export const projects: Project[] = [
   {
     title: "Checkmate",
     description:
-      "A web project exploring interactive tooling, deployed and live on its own domain.",
-    tech: ["JavaScript", "Web"],
-    repo: "checkmate",
-    liveUrl: "https://checkmate.wiki/",
+      "Browser extension that fact-checks articles as you read them. Built at HackUTA.",
+    tech: ["JavaScript", "Browser Extension"],
+    repo: "Checkmate-HackUTA",
+    liveUrl: "https://devpost.com/software/checkmate-rmb6zt",
+    liveLabel: "Devpost",
   },
 ]
