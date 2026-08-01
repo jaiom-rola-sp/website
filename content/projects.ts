@@ -35,6 +35,24 @@ export const projects: Project[] = [
     featured: true,
   },
   {
+    title: "Connection",
+    description:
+      "Publicly hosted, end-to-end agentic AI distributed system that helps first responders monitor and repair networks, simulating 100+ nodes with AWS IoT TwinMaker to create, detect, and fix outages in real time.",
+    impact:
+      "Won the AWS Hackathon. Stored and retrieved 100+ technicians' data through RDS and Lambda WebSockets; used Amazon Lex V2 and Bedrock for agentic network monitoring that calls Lambda scripts for ticketing and notifications via Amazon SNS.",
+    award: "AWS Hackathon Winner",
+    tech: [
+      "AWS Lambda",
+      "Amazon RDS",
+      "Amazon S3",
+      "Amazon Bedrock",
+      "Amazon Lex V2",
+      "Amazon SNS",
+    ],
+    repo: "firtconnect",
+    featured: true,
+  },
+  {
     title: "GS Mutual Fund Calculator",
     description:
       "Mutual fund projection engine built for the Goldman Sachs Engineering Leadership Series challenge, using Monte Carlo simulations and CAPM modeling.",
