@@ -25,8 +25,13 @@ type GitHubRepoResponse = {
 // if the API is unavailable or rate-limited so the build never breaks.
 const REVALIDATE_SECONDS = 60 * 60 * 24
 
+// `repo` is either a bare slug (owned by siteConfig.githubUsername) or a
+// full "owner/repo" string for repos hosted under a different account/org.
 const fetchRepoStats = async (repo: string): Promise<GitHubStats | null> => {
-  const url = `https://api.github.com/repos/${siteConfig.githubUsername}/${repo}`
+  const ownerRepo = repo.includes("/")
+    ? repo
+    : `${siteConfig.githubUsername}/${repo}`
+  const url = `https://api.github.com/repos/${ownerRepo}`
   const headers: Record<string, string> = {
     Accept: "application/vnd.github+json",
     "X-GitHub-Api-Version": "2022-11-28",
@@ -72,7 +77,9 @@ export const getEnrichedProjects = async (): Promise<EnrichedProject[]> => {
 }
 
 export const repoUrl = (repo: string): string =>
-  `https://github.com/${siteConfig.githubUsername}/${repo}`
+  repo.includes("/")
+    ? `https://github.com/${repo}`
+    : `https://github.com/${siteConfig.githubUsername}/${repo}`
 
 export const formatRelativeDate = (iso: string | null): string | null => {
   if (!iso) return null

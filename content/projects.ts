@@ -10,7 +10,8 @@ export type Project = {
   // Award/recognition shown as a sticker on the card (e.g. hackathon win).
   award?: string
   tech: string[]
-  // GitHub repo slug under the configured username (enables live stats).
+  // GitHub repo slug under the configured username, or a full "owner/repo"
+  // string for repos hosted under a different account/org (enables live stats).
   repo?: string
   // Live/demo URL (deployment, Devpost, etc.).
   liveUrl?: string
@@ -50,6 +51,16 @@ export const projects: Project[] = [
       "Amazon SNS",
     ],
     repo: "firtconnect",
+    featured: true,
+  },
+  {
+    title: "UTD Trends",
+    description:
+      "Open-source class-planning tool with UTD Nebula Labs that compares past grades, professor ratings, and reviews across 8,000+ professor records to help students pick the right class.",
+    impact:
+      "Cut database query response times from 143ms to 97ms via query result caching and schema denormalization; integrated Rate My Professor data into the search module.",
+    tech: ["TypeScript", "Next.js", "MUI", "Tailwind CSS"],
+    liveUrl: "https://trends.utdnebula.com",
     featured: true,
   },
   {
