@@ -4,15 +4,24 @@ import { useEffect, useState } from "react"
 import { Eye } from "lucide-react"
 
 // Calls the AWS backend (API Gateway -> Lambda -> DynamoDB) that tracks
-// total site visits. See infra/sam/ for the stack that provisions it.
+// unique site visitors. See infra/sam/ for the stack that provisions it.
 // Renders nothing if the endpoint isn't configured or the request fails,
 // so a missing/misconfigured backend never breaks the page.
 const API_URL = process.env.NEXT_PUBLIC_VISITOR_API_URL
 
-// The Lambda increments on every call, so only hit it once per tab session
-// (reloads within the session just replay the cached count) rather than
-// bumping the total on every page refresh.
-const SESSION_CACHE_KEY = "visitorCount"
+// Persisted in localStorage (survives browser restarts, unlike
+// sessionStorage) so the same visitor is recognized days/weeks later. The
+// Lambda only increments the total the first time it sees a given id.
+const VISITOR_ID_KEY = "visitorId"
+
+const getOrCreateVisitorId = () => {
+  let id = localStorage.getItem(VISITOR_ID_KEY)
+  if (!id) {
+    id = crypto.randomUUID()
+    localStorage.setItem(VISITOR_ID_KEY, id)
+  }
+  return id
+}
 
 const VisitorCounter = () => {
   const [visits, setVisits] = useState<number | null>(null)
@@ -20,19 +29,16 @@ const VisitorCounter = () => {
   useEffect(() => {
     if (!API_URL) return
 
-    const cached = sessionStorage.getItem(SESSION_CACHE_KEY)
-    if (cached) {
-      setVisits(Number(cached))
-      return
-    }
-
     let cancelled = false
-    fetch(API_URL, { method: "POST" })
+    fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ visitorId: getOrCreateVisitorId() }),
+    })
       .then((res) => (res.ok ? res.json() : Promise.reject(res)))
       .then((data: { visits?: number }) => {
         if (!cancelled && typeof data.visits === "number") {
           setVisits(data.visits)
-          sessionStorage.setItem(SESSION_CACHE_KEY, String(data.visits))
         }
       })
       .catch(() => {
