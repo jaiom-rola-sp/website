@@ -1,4 +1,5 @@
 import Marquee from "./Marquee"
+import VisitorCounter from "./VisitorCounter"
 import { siteConfig } from "@/content/site"
 
 const Footer = () => {
@@ -23,6 +24,7 @@ const Footer = () => {
           &copy; {year} {siteConfig.name} · Made with Next.js & too much coffee
         </p>
         <div className="flex items-center gap-5">
+          <VisitorCounter />
           {siteConfig.socials.map((social) => (
             <a
               key={social.label}

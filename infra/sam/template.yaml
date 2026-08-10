@@ -1,0 +1,72 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  Visitor counter backend for jaiomrola.com. HTTP API -> Lambda -> DynamoDB.
+  The resume site itself stays on Vercel; this stack only provides the
+  /visit endpoint used to increment and read the total visitor count.
+
+Parameters:
+  AllowedOrigin:
+    Type: String
+    Default: "https://jaiom-rola.vercel.app"
+    Description: >
+      Origin allowed to call this API via CORS. Set to your production
+      site URL (and redeploy) if it changes.
+
+Globals:
+  Function:
+    Runtime: nodejs22.x
+    Architectures: [arm64]
+    Timeout: 5
+    MemorySize: 128
+
+Resources:
+  VisitorCounterTable:
+    Type: AWS::Serverless::SimpleTable
+    Properties:
+      TableName: resume-visitors
+      PrimaryKey:
+        Name: counterId
+        Type: String
+      SSESpecification:
+        SSEEnabled: true
+
+  VisitorApi:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      CorsConfiguration:
+        AllowOrigins:
+          - !Ref AllowedOrigin
+        AllowMethods:
+          - POST
+          - OPTIONS
+        AllowHeaders:
+          - content-type
+
+  VisitorCounterFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: resume-visitor-counter
+      CodeUri: src/visitor-counter/
+      Handler: index.handler
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref VisitorCounterTable
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref VisitorCounterTable
+      Events:
+        Visit:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref VisitorApi
+            Path: /visit
+            Method: POST
+
+Outputs:
+  VisitorApiUrl:
+    Description: Invoke URL for the visitor endpoint (set as NEXT_PUBLIC_VISITOR_API_URL)
+    Value: !Sub "https://${VisitorApi}.execute-api.${AWS::Region}.amazonaws.com/visit"
+  VisitorCounterTableName:
+    Description: DynamoDB table name
+    Value: !Ref VisitorCounterTable

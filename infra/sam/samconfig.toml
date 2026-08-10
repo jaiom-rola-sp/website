@@ -1,0 +1,14 @@
+version = 0.1
+
+[default.deploy.parameters]
+stack_name = "y"
+resolve_s3 = true
+s3_prefix = "y"
+region = "us-east-1"
+confirm_changeset = true
+capabilities = "CAPABILITY_IAM"
+parameter_overrides = "AllowedOrigin=\"https://jaiom-rola.vercel.app\""
+image_repositories = []
+
+[default.global.parameters]
+region = "us-east-1"
