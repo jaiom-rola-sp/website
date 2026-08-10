@@ -9,11 +9,22 @@ import { Eye } from "lucide-react"
 // so a missing/misconfigured backend never breaks the page.
 const API_URL = process.env.NEXT_PUBLIC_VISITOR_API_URL
 
+// The Lambda increments on every call, so only hit it once per tab session
+// (reloads within the session just replay the cached count) rather than
+// bumping the total on every page refresh.
+const SESSION_CACHE_KEY = "visitorCount"
+
 const VisitorCounter = () => {
   const [visits, setVisits] = useState<number | null>(null)
 
   useEffect(() => {
     if (!API_URL) return
+
+    const cached = sessionStorage.getItem(SESSION_CACHE_KEY)
+    if (cached) {
+      setVisits(Number(cached))
+      return
+    }
 
     let cancelled = false
     fetch(API_URL, { method: "POST" })
@@ -21,6 +32,7 @@ const VisitorCounter = () => {
       .then((data: { visits?: number }) => {
         if (!cancelled && typeof data.visits === "number") {
           setVisits(data.visits)
+          sessionStorage.setItem(SESSION_CACHE_KEY, String(data.visits))
         }
       })
       .catch(() => {
