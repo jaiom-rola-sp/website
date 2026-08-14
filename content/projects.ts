@@ -36,12 +36,11 @@ export const projects: Project[] = [
     featured: true,
   },
   {
-    title: "Connection",
+    title: "CourtPulse",
     description:
-      "Publicly hosted, end-to-end agentic AI distributed system that helps first responders monitor and repair networks, simulating 100+ nodes with AWS IoT TwinMaker to create, detect, and fix outages in real time.",
+      "Publicly hosted, end-to-end agentic AI distributed system for fantasy sports enthusiasts, simulating 100+ live games with AWS IoT TwinMaker to model real-time player shifts and proxy into live box score monitoring systems.",
     impact:
-      "Won the AWS Hackathon. Stored and retrieved 100+ technicians' data through RDS and Lambda WebSockets; used Amazon Lex V2 and Bedrock for agentic network monitoring that calls Lambda scripts for ticketing and notifications via Amazon SNS.",
-    award: "AWS Hackathon Winner",
+      "Stored and retrieved 100+ player and matchup records through RDS and Lambda WebSockets; used Amazon Lex V2 and Bedrock to create agentic lineup recommendations across leagues that trigger Lambda scripts for automated trade alerts and waiver notifications via Amazon SNS.",
     tech: [
       "AWS Lambda",
       "Amazon RDS",
@@ -50,7 +49,6 @@ export const projects: Project[] = [
       "Amazon Lex V2",
       "Amazon SNS",
     ],
-    repo: "firtconnect",
     featured: true,
   },
   {
