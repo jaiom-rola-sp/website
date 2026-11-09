@@ -23,16 +23,15 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    title: "Vocalyze",
+    title: "REPLIC8",
     description:
-      "Gamified public-speaking platform with level-gated practice paths and live debate rooms, powered by AI voice analysis.",
+      "Turns legacy code on GitHub (COBOL, Fortran, Java, Python, C, and more) into tested REST and MCP tools that AI agents can call, with the legacy code running only in a locked-down Docker sandbox.",
     impact:
-      "Won HackAI. Level-mastery progression, single-room club lobbies with random debate topics, and ElevenLabs + Gemini feedback loops.",
-    award: "HackAI Winner",
-    tech: ["React Native", "ElevenLabs", "Gemini", "JavaScript", "Swift"],
-    repo: "Vocalyze-HackAI",
-    liveUrl: "https://devpost.com/software/temp-project-cu4oln",
-    liveLabel: "Devpost",
+      "Won HackUTD ZeroDay 8090. Every tool is verified against the real code before publishing, self-repairs when the legacy code changes, and exposes many systems through one gateway with a graph of how they connect.",
+    award: "HackUTD ZeroDay 8090 Winner",
+    tech: ["Python", "FastAPI", "MCP", "Docker", "JavaScript", "NVIDIA Nemotron"],
+    repo: "REPLIC8",
+    liveUrl: "https://www.replic8.work",
     featured: true,
   },
   {
@@ -52,44 +51,14 @@ export const projects: Project[] = [
     featured: true,
   },
   {
-    title: "UTD Trends",
+    title: "MLB & FIFA Prediction Engine",
     description:
-      "Open-source class-planning tool with UTD Nebula Labs that compares past grades, professor ratings, and reviews across 8,000+ professor records to help students pick the right class.",
+      "Sports prediction models that convert public stats APIs into live win probabilities for baseball and football.",
     impact:
-      "Cut database query response times from 143ms to 97ms via query result caching and schema denormalization; integrated Rate My Professor data into the search module.",
-    tech: ["TypeScript", "Next.js", "MUI", "Tailwind CSS"],
-    liveUrl: "https://trends.utdnebula.com",
+      "Live-game ML model cut prediction error 18% vs. static odds; backtesting held a ~65% win rate across a 500-game sample.",
+    tech: ["Go", "SQLite", "Next.js", "TypeScript", "MLB Stats API"],
+    repo: "fifia_and_mlb",
     featured: true,
-  },
-  {
-    title: "GS Mutual Fund Calculator",
-    description:
-      "Mutual fund projection engine built for the Goldman Sachs Engineering Leadership Series challenge, using Monte Carlo simulations and CAPM modeling.",
-    impact:
-      "Placed 3rd. Halved projection error (14.2% → 7.1%) against 5-year historical backtests; Python backend validated at 3,247 peak requests/min with Locust.",
-    award: "GS ELS 3rd Place",
-    tech: ["Python", "FastAPI", "Angular", "Locust"],
-    repo: "Goldman-Sachs-ELS-Challenge",
-    featured: true,
-  },
-  {
-    title: "LegalWhiz",
-    description:
-      "AI-powered SaaS that helps founders generate legal documents like NDAs and privacy policies in seconds.",
-    impact:
-      "Full auth, billing-ready data layer, and OpenAI document generation with a clean, secure UX.",
-    tech: ["Next.js 14", "TypeScript", "Clerk", "Supabase", "OpenAI"],
-    repo: "legalwhiz",
-    liveUrl: "https://legalwhiz.vercel.app",
-    featured: true,
-  },
-  {
-    title: "DentalPro",
-    description:
-      "AI voice receptionist for dental practices — a conversational agent that handles patient calls and scheduling around the clock.",
-    tech: ["React", "TypeScript", "Vite", "Tailwind"],
-    repo: "Dental-pro",
-    liveUrl: "https://dental-pro-opal.vercel.app",
   },
   {
     title: "Adjacent",
@@ -104,13 +73,48 @@ export const projects: Project[] = [
     featured: true,
   },
   {
-    title: "MLB & FIFA Prediction Engine",
+    title: "GS Mutual Fund Calculator",
     description:
-      "Sports prediction models that convert public stats APIs into live win probabilities for baseball and football.",
+      "Mutual fund projection engine built for the Goldman Sachs Engineering Leadership Series challenge, using Monte Carlo simulations and CAPM modeling.",
     impact:
-      "Live-game ML model cut prediction error 18% vs. static odds; backtesting held a ~65% win rate across a 500-game sample.",
-    tech: ["Go", "SQLite", "Next.js", "TypeScript", "MLB Stats API"],
-    repo: "fifia_and_mlb",
+      "Placed 3rd. Halved projection error (14.2% → 7.1%) against 5-year historical backtests; Python backend validated at 3,247 peak requests/min with Locust.",
+    award: "GS ELS 3rd Place",
+    tech: ["Python", "FastAPI", "Angular", "Locust"],
+    repo: "Goldman-Sachs-ELS-Challenge",
+    featured: true,
+  },
+  {
+    title: "Vocalyze",
+    description:
+      "Gamified public-speaking platform with level-gated practice paths and live debate rooms, powered by AI voice analysis.",
+    impact:
+      "Won HackAI. Level-mastery progression, single-room club lobbies with random debate topics, and ElevenLabs + Gemini feedback loops.",
+    award: "HackAI Winner",
+    tech: ["React Native", "ElevenLabs", "Gemini", "JavaScript", "Swift"],
+    repo: "Vocalyze-HackAI",
+    liveUrl: "https://devpost.com/software/temp-project-cu4oln",
+    liveLabel: "Devpost",
+    featured: true,
+  },
+  {
+    title: "UTD Trends",
+    description:
+      "Open-source class-planning tool with UTD Nebula Labs that compares past grades, professor ratings, and reviews across 8,000+ professor records to help students pick the right class.",
+    impact:
+      "Cut database query response times from 143ms to 97ms via query result caching and schema denormalization; integrated Rate My Professor data into the search module.",
+    tech: ["TypeScript", "Next.js", "MUI", "Tailwind CSS"],
+    liveUrl: "https://trends.utdnebula.com",
+    featured: true,
+  },
+  {
+    title: "LegalWhiz",
+    description:
+      "AI-powered SaaS that helps founders generate legal documents like NDAs and privacy policies in seconds.",
+    impact:
+      "Full auth, billing-ready data layer, and OpenAI document generation with a clean, secure UX.",
+    tech: ["Next.js 14", "TypeScript", "Clerk", "Supabase", "OpenAI"],
+    repo: "legalwhiz",
+    liveUrl: "https://legalwhiz.vercel.app",
     featured: true,
   },
   {
@@ -121,5 +125,13 @@ export const projects: Project[] = [
     repo: "Checkmate-HackUTA",
     liveUrl: "https://devpost.com/software/checkmate-rmb6zt",
     liveLabel: "Devpost",
+  },
+  {
+    title: "DentalPro",
+    description:
+      "AI voice receptionist for dental practices — a conversational agent that handles patient calls and scheduling around the clock.",
+    tech: ["React", "TypeScript", "Vite", "Tailwind"],
+    repo: "Dental-pro",
+    liveUrl: "https://dental-pro-opal.vercel.app",
   },
 ]
