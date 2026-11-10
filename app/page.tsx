@@ -1,11 +1,5 @@
-import Nav from "@/components/Nav"
-import Hero from "@/components/Hero"
-import About from "@/components/About"
-import ExperienceTimeline from "@/components/ExperienceTimeline"
-import ProjectGrid from "@/components/ProjectGrid"
-import Skills from "@/components/Skills"
-import Contact from "@/components/Contact"
-import Footer from "@/components/Footer"
+import Possession from "@/components/possession/Possession"
+import StoryContent from "@/components/possession/StoryContent"
 import { getEnrichedProjects } from "@/lib/github"
 import { siteConfig } from "@/content/site"
 
@@ -32,24 +26,17 @@ export default async function Home() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd).replace(/</g, "\\u003c") }}
       />
       <a
-        href="#projects"
-        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-accent focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-accent-foreground"
+        href="#about"
+        className="skip-link"
       >
         Skip to content
       </a>
-      <Nav />
-      <main className="flex-1">
-        <Hero />
-        <About />
-        <ExperienceTimeline />
-        <ProjectGrid projects={projects} />
-        <Skills />
-        <Contact />
-      </main>
-      <Footer />
+      <Possession>
+        <StoryContent projects={projects} />
+      </Possession>
     </>
   )
 }

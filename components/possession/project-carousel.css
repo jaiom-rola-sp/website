@@ -1,0 +1,16 @@
+.carousel { position: relative; }
+.carousel-controls { display: flex; gap: 10px; justify-content: flex-end; margin-bottom: 14px; }
+.carousel-controls button { display: grid; place-items: center; width: 44px; height: 44px; cursor: pointer; border: 1px solid var(--line); border-radius: 50%; color: var(--foreground); background: var(--panel); }
+.carousel-controls button:hover { border-color: var(--accent); color: var(--accent); }
+.carousel-track { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; list-style: none; padding: 0 0 14px; overscroll-behavior-x: contain; }
+.carousel-card { flex: 0 0 min(380px, 86%); scroll-snap-align: start; display: flex; flex-direction: column; gap: 12px; padding: 22px; border: 1px solid var(--line); background: var(--panel); }
+.carousel-card h3 { font-size: 20px; font-weight: 700; letter-spacing: -.03em; }
+.carousel-award { display: inline-flex; align-items: center; gap: 7px; align-self: flex-start; padding: 5px 9px; border: 1px solid var(--accent); color: var(--accent); font: 9px var(--font-mono); }
+.carousel-desc { font-size: 13px; line-height: 1.7; }
+.carousel-impact { color: var(--muted-foreground); font-size: 12px; line-height: 1.7; }
+.carousel-tech { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; padding: 0; margin-top: auto; }
+.carousel-tech li { padding: 4px 8px; border: 1px solid var(--line); color: var(--muted-foreground); font: 9px var(--font-mono); }
+.carousel-links { display: flex; flex-wrap: wrap; gap: 16px; padding-top: 12px; border-top: 1px solid var(--line); }
+.carousel-links a { display: inline-flex; align-items: center; gap: 7px; min-height: 36px; font-size: 12px; font-weight: 600; }
+.carousel-links a:hover { color: var(--accent); }
+.carousel-gh { width: 15px; height: 15px; }

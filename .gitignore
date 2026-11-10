@@ -43,3 +43,6 @@ infra/sam/src/*/node_modules/
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# raw generated 3D/texture sources (served copies live in public/arena)
+/assets/

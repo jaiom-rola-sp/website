@@ -1,10 +1,11 @@
 import type { Metadata } from "next"
-import { Bricolage_Grotesque, Space_Grotesk, JetBrains_Mono } from "next/font/google"
+import { Barlow_Condensed, Space_Grotesk, JetBrains_Mono } from "next/font/google"
 import "./globals.css"
 import { siteConfig } from "@/content/site"
 
-const bricolage = Bricolage_Grotesque({
-  variable: "--font-bricolage",
+const display = Barlow_Condensed({
+  variable: "--font-barlow",
+  weight: ["500", "600", "700", "800"],
   subsets: ["latin"],
   display: "swap",
 })
@@ -58,10 +59,7 @@ const themeInitScript = `
 (function () {
   try {
     var stored = localStorage.getItem("theme");
-    var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    if (stored === "dark" || (!stored && prefersDark)) {
-      document.documentElement.classList.add("dark");
-    }
+    document.documentElement.classList.toggle("dark", stored !== "light");
   } catch (e) {}
 })();
 `
@@ -75,7 +73,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${bricolage.variable} ${spaceGrotesk.variable} ${jetbrains.variable} h-full`}
+      className={`dark ${display.variable} ${spaceGrotesk.variable} ${jetbrains.variable} h-full`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />

@@ -1,44 +1,59 @@
 @import "tailwindcss";
+@import "./arena.css";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  /* Paper & Ink — neo-brutalist token set */
-  --background: #f4eee1;
-  --foreground: #171610;
-  --card: #fffbf0;
-  --card-foreground: #171610;
-  --ink: #171610;
-  --paper: #f4eee1;
-  --accent: #ff4d24;
-  --accent-foreground: #171610;
-  --sun: #ffc943;
-  --lilac: #8a7cff;
-  --mint: #17a97e;
-  --muted: #e9e0ca;
-  --muted-foreground: #56523f;
-  --border: #171610;
-  --ring: #ff4d24;
-  --shadow-color: #171610;
+  color-scheme: light;
+  --background: #efeee7;
+  --foreground: #25271f;
+  --card: #f6f4ed;
+  --card-foreground: #25271f;
+  --ink: #25271f;
+  --paper: #efeee7;
+  --accent: #ac3d21;
+  --accent-hover: #db6b44;
+  --accent-foreground: #fff4e5;
+  --muted: #e4e2d7;
+  --muted-foreground: #696c60;
+  --border: #d3d1c4;
+  --ring: #ac3d21;
+  --line: #d5d4c9;
+  --line-strong: #b9b9ac;
+  --panel: #f3f1e9;
+  --scoreboard: #f5f3eb;
+  --court-glow: #d6b48a22;
+  --bronze: #8a5b36;
+  --sun: #cfa65a;
+  --lilac: #958fab;
+  --mint: #548b72;
+  --shadow-color: #25271f;
 }
 
 .dark {
-  --background: #14130f;
-  --foreground: #f4eee1;
-  --card: #1d1c16;
-  --card-foreground: #f4eee1;
-  --ink: #f4eee1;
-  --paper: #14130f;
-  --accent: #ff5a31;
-  --accent-foreground: #171610;
-  --sun: #ffc943;
-  --lilac: #a99dff;
-  --mint: #2fc496;
-  --muted: #28261e;
-  --muted-foreground: #aaa48e;
-  --border: #f4eee1;
-  --ring: #ff5a31;
-  --shadow-color: #f4eee1;
+  color-scheme: dark;
+  --background: #141611;
+  --foreground: #eeeede;
+  --card: #1c1f18;
+  --card-foreground: #eeeede;
+  --ink: #eeeede;
+  --paper: #141611;
+  --accent: #f28755;
+  --accent-hover: #ffa271;
+  --accent-foreground: #141611;
+  --muted: #25291e;
+  --muted-foreground: #919987;
+  --border: #343b2b;
+  --ring: #f28755;
+  --line: #2b3124;
+  --line-strong: #414936;
+  --panel: #1b1e17;
+  --scoreboard: #191d15;
+  --court-glow: #bc81491a;
+  --bronze: #d7a77e;
+  --sun: #cfa65a;
+  --lilac: #958fab;
+  --mint: #71a389;
 }
 
 @theme inline {
@@ -58,126 +73,22 @@
   --color-border: var(--border);
   --color-ring: var(--ring);
   --font-sans: var(--font-space-grotesk);
-  --font-display: var(--font-bricolage);
+  --font-display: var(--font-barlow);
   --font-mono: var(--font-jetbrains);
 }
 
 @layer base {
-  * {
-    border-color: var(--border);
-  }
-
-  html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 6rem;
-  }
-
-  body {
-    background-color: var(--background);
-    color: var(--foreground);
-    font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-  }
-
-  ::selection {
-    background-color: var(--accent);
-    color: var(--accent-foreground);
-  }
-
-  :focus-visible {
-    outline: 3px solid var(--ring);
-    outline-offset: 3px;
-  }
-}
-
-/* Hard offset shadows — the neo-brutalist signature. No blur, ever. */
-@utility shadow-hard-sm {
-  box-shadow: 3px 3px 0 0 var(--shadow-color);
-}
-
-@utility shadow-hard {
-  box-shadow: 5px 5px 0 0 var(--shadow-color);
-}
-
-@utility shadow-hard-lg {
-  box-shadow: 8px 8px 0 0 var(--shadow-color);
-}
-
-/* Mechanical press: element travels into its own shadow on hover/press. */
-@utility press {
-  transition:
-    transform 150ms cubic-bezier(0.34, 1.56, 0.64, 1),
-    box-shadow 150ms cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.press:hover {
-  transform: translate(2px, 2px);
-  box-shadow: 3px 3px 0 0 var(--shadow-color);
-}
-
-.press:active {
-  transform: translate(5px, 5px);
-  box-shadow: 0 0 0 0 var(--shadow-color);
-}
-
-.press-lg:hover {
-  transform: translate(3px, 3px);
-  box-shadow: 5px 5px 0 0 var(--shadow-color);
-}
-
-.press-lg:active {
-  transform: translate(8px, 8px);
-  box-shadow: 0 0 0 0 var(--shadow-color);
-}
-
-/* Subtle paper grain */
-@utility paper-grain {
-  background-image: radial-gradient(
-    circle at 1px 1px,
-    color-mix(in srgb, var(--foreground) 7%, transparent) 1px,
-    transparent 0
-  );
-  background-size: 28px 28px;
-}
-
-/* Scrolling ticker ribbon. Content must be duplicated once (aria-hidden). */
-@keyframes marquee-scroll {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-@utility animate-marquee {
-  animation: marquee-scroll 24s linear infinite;
-}
-
-/* Hand-drawn squiggle underline */
-@utility squiggle {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='6' viewBox='0 0 24 6'%3E%3Cpath d='M0 3 C 3 0, 6 0, 9 3 S 15 6, 18 3 S 21 0, 24 3' fill='none' stroke='%23ff4d24' stroke-width='2'/%3E%3C/svg%3E");
-  background-repeat: repeat-x;
-  background-position: 0 100%;
-  background-size: 24px 6px;
-  padding-bottom: 8px;
+  * { box-sizing: border-box; border-color: var(--border); }
+  html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+  body { background: var(--background); color: var(--foreground); font-family: var(--font-sans), sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  button, a { -webkit-tap-highlight-color: transparent; }
+  button { font: inherit; }
+  ::selection { background: var(--accent); color: var(--background); }
+  :focus-visible { outline: 2px solid var(--ring); outline-offset: 5px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  .animate-marquee {
-    animation: none;
-  }
-
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
-  }
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
 }
